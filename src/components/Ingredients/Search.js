@@ -4,6 +4,7 @@ import Card from "../UI/Card";
 import "./Search.css";
 
 const Search = React.memo((props) => {
+  const { onLoadedIngredients } = props
   const [enteredFilter, setEnteredFilter] = useState("");
 
   useEffect(() => {
@@ -18,9 +19,9 @@ const Search = React.memo((props) => {
           amount: responseData[key].amount,
         });
       }
-      props.onLoadedIngredients(loadedIngredients);
+      onLoadedIngredients(loadedIngredients);
     });
-  }, [enteredFilter, props]);
+  }, [enteredFilter, onLoadedIngredients]);
 
   return (
     <section className="search">
