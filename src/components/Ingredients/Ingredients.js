@@ -8,10 +8,20 @@ function Ingredients() {
   const [userIngredients, setUserIngredients] = useState([]);
 
   const addIngredientHandler = (ingredient) => {
-    setUserIngredients((previousIngredient) => [
-      ...previousIngredient,
-      { id: Math.random().toString(), ...ingredient },
-    ]);
+    fetch("https://hooks-d131d.firebaseio.com/ingredients.json/", {
+      method: "POST",
+      body: JSON.stringify(ingredient),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseData) => {
+        setUserIngredients((previousIngredient) => [
+          ...previousIngredient,
+          { id: responseData.name, ...ingredient },
+        ]);
+      });
   };
 
   const removeItemHandler = (ingId) => {
