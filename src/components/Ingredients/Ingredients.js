@@ -23,6 +23,10 @@ function Ingredients() {
       });
   }, []);
 
+  useEffect(() => {
+    console.log('Rendering Ingredients', userIngredients)
+  }, [userIngredients])
+
   const addIngredientHandler = (ingredient) => {
     fetch("https://hooks-d131d.firebaseio.com/ingredients.json/", {
       method: "POST",
